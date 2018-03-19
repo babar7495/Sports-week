@@ -1,4 +1,44 @@
-<!DOCTYPE html>
+<?php
+if( isset ($_POST['submit_btn'])){
+
+$fname = $_POST['fname'];
+$regid = $_POST['regid'];
+$password = $_POST['password'];
+$cpassword = $_POST['cpassword'];
+$email = $_POST['email'];
+$cno = $_POST['cno'];
+$department = $_POST['department'];
+$samester = $_POST['samester'];
+
+
+
+  $host_name='localhost';
+  $db_username = 'root';
+  $db_password = '';
+  $db_name='sportsweekdb';
+
+  $conn=mysqli_connect($host_name,$db_username,$db_password,$db_name);
+  if(!$conn){
+    die("coonection failed :" . mysqli_error($conn));
+  }
+
+  $query = "INSERT INTO student_registration(fname, regid, password, cpassword, email, cno, department, samester)
+              VALUES ('$fname', '$regid', '$password', '$cpassword', '$email', '$cno', '$department', '$samester' ) ";
+  $result = mysqli_query($conn, $query);
+  if(!$result){
+    die( "Query faild :" . mysqli_error($conn));
+  }
+  else {
+    echo "created account Successfully";
+  }
+
+}
+ ?>
+
+
+
+
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -89,7 +129,7 @@
         <div class="container">
             <ul class="navbar-nav ">
             <li class="nav-item dropdown">
-            <a class="nav-link " href="http://localhost/sports%20week/#"> Home</a>
+            <a class="nav-link " href="index.php"> Home</a>
         </li>
         <li class="nav-item dropdown">
         <a class="nav-link " href="#"> Contact Us</a>
@@ -100,62 +140,68 @@
         </nav>
       </article>
 
-      <article class="container">
+      <article class="container text-center font-weight-bold ">
+        <h1>Create an account</h1>
         <div class="row">
-          <div class="col-3">
+          <div class="col-2">
 
           </div>
-          <div class="col-3">
-        <a href="registrationform.php"><img src="image/registrationlogo.png" class="rounded"  width="60%"></a>
+          <div class="col-4">
 
-        </div>
-        <div class="col-1">
+        <form class="" action="" method="post">
+          <label  for="">Full Name</label>
+          <div>
+            <input class="form-control" type="text" name="fname" value="" placeholder="name">
+          </div>
+          <label for="">Registration No.</label>
+          <div class="">
+            <input class="form-control" type="number" name="regid" value="" placeholder="registration no.">
+          </div>
 
+          <label for="">Password</label>
+          <div class="">
+            <input class="form-control" type="password" name="password" value="" placeholder="password">
+          </div>
+          <label for="">Confirm Password</label>
+          <div class="">
+            <input class="form-control" type="password" name="cpassword" value="" placeholder="confirm password">
+          </div>
         </div>
-        <div class="col-3">
-          <a href="#"><img src="image/loginlogo.png" class="rounded"  width="55%"></a>
+        <div class="col-4">
+          <label for="">Email</label>
+          <div class="">
+            <input class="form-control" type="email" name="email" value="" placeholder="email">
+          </div>
+          <label for="">Contact No.</label>
+          <div class="">
+            <input class="form-control" type="number" name="cno" value="" placeholder="mobile number">
+          </div>
+          <label for="">Department</label>
+          <div class="">
+            <input class="form-control" type="text" name="department" value="" placeholder="Department name">
+          </div>
+          <label for="">Samester</label>
+          <div class="">
+            <input type="number" name="samester" min="1" max="14" value="">
+          </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-2">
+
+          </div>
+          <div class="col-8">
+        <div class="">
+          <br>
+          <button type="submit" class="btn btn-outline-primary font-weight-bold bg-ino btn-block" name="submit_btn">Register</button>
         </div>
       </div>
-      </article>
+      </div>
 
-      <div class="jumbotron jumbotron-fluid">
-      <article class="container ">
-        <div class="row text-secondary col-expand-sm ">
-          <div class="col-3 border border-warning">
-            <h1 class="border-bottom border-info">Events</h1>
-            <a href="#">seminar games registration</a>
-            <p>12 feb 2018</p>
-            <a href="#">Sports week details eg (date to date)</a>
-            <p>12 feb 2018</p>
-            <a href="#">Games includes in sports week every game is very intersting and enjoyable</a>
-            <p>12 feb 2018</p>
-
-          </div>
-          <div class="col-1">    </div>
-          <div class="col-3 border border-warning">
-            <h1 class="border-bottom border-info">Latest News</h1>
-            <a href="#">seminar games registration</a>
-            <p>12 feb 2018</p>
-            <a href="#">Sports week details eg (date to date)</a>
-            <p>12 feb 2018</p>
-            <a href="#">Games includes in sports week every game is very intersting and enjoyable</a>
-            <p>12 feb 2018</p>
-          </div>
-          <div class="col-1">  </div>
-          <div class="col-3 border border-warning">
-            <h1 class="border-bottom border-info">Map</h1>
-            <a href="#">seminar games registration</a>
-            <p>12 feb 2018</p>
-            <a href="#">Sports week details eg (date to date)</a>
-            <p>12 feb 2018</p>
-            <a href="#">Games includes in sports week every game is very intersting and enjoyable</a>
-            <p>12 feb 2018</p>
-
-          </div>
-        </div>
-          </div>
+        </form>
 
       </article>
+
     </section>
 
   </body>
